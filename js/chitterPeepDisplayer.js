@@ -1,18 +1,28 @@
 chitterChatter.controller('ChitterPeepController', ['$http','$scope', function($http, $scope) {
- 
+
   var self = this;
-  url ='http://localhost:3000/peeps'
-    postUrl = 'http://localhost:3000/peeps/new'
+  url ='/peeps'
+
+    var req = {
+         method: 'POST',
+         url: url,
+     headers: {
+        'Content-Type': undefined
+      },
+    data: { message: "test" }
+    }
+
     self.post = function() {
-        console.log('posting!')
-        $http.post(postUrl, {message: "this is a peep"}).
+        //console.log(req);
+        $http(req).
             success(function(result) {
-                console.log('success!');
+                console.log(result);
             }).error(function(){
-                console.log('error');
+                //console.log('error');
+                //console.log(req);
             });
     }
-    
+
   self.get = function() {
       console.log("hello")
         $http.get(url).success(function(result) {
